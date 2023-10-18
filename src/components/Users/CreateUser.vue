@@ -1,19 +1,19 @@
 <template>
   <div>
-    <h1>Create Users</h1>
-    <form v-on:submit.prevent="createUser">
-      <p>name: <input type="text" v-model="user.name" /></p>
-      <p>lastname: <input type="text" v-model="user.lastname" /></p>
-      <p>email: <input type="text" v-model="user.email" /></p>
-      <p>password: <input type="text" v-model="user.password" /></p>
-      <p><button type="submit">create user</button></p>
+    <h1>Create course</h1>
+    <form v-on:submit.prevent="CousesCreate">
+      <p>title: <input type="text" v-model="course.title" /></p>
+      <p>instructor: <input type="text" v-model="course.instructor" /></p>
+      <p>description: <input type="text" v-model="course.description" /></p>
+      <p>total_student: <input type="text" v-model="course.total_student" /></p>
+      <p><button type="submit">create course</button></p>
     </form>
     <hr />
     <div>
-      <p>name: {{ user.name }}</p>
-      <p>lastname: {{ user.lastname }}</p>
-      <p>email: {{ user.email }}</p>
-      <p>password: {{ user.password }}</p>
+      <p>title: {{ course.title }}</p>
+      <p>instructor: {{ course.instructor }}</p>
+      <p>description: {{ course.description }}</p>
+      <p>total_student: {{ course.total_student }}</p>
     </div>
   </div>
 </template>
@@ -23,21 +23,22 @@ import UsersService from "@/services/UserService";
 export default {
   data() {
     return {
-      user: {
-        name: "",
-        lastname: "",
-        email: "",
-        password: "",
-        status: "active"
+      course: {
+        title: "",
+        instructor: "",
+        description: "",
+        total_student: "",
+        status: "active",
+        type: "core subject"
       }
     };
   },
   methods: {
-    async createUser() {
+    async CousesCreate() {
       try {
-        await UsersService.post(this.user);
+        await UsersService.post(this.course);
         this.$router.push({
-          name: "users"
+          name: "course"
         });
       } catch (err) {
         console.log(err);
